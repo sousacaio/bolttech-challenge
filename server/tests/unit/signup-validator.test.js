@@ -12,17 +12,26 @@ describe('signup-validator', () => {
     it('should return 400 if there is no account', () => {
         let mockedUser = {
             account: null,
-            email: 'test@test.com.br'
+            password: 'test@test.com'
         }
         const result = sut.handle(mockedUser)
         expect(result.statusCode).toBe(400)
     })
-    it('should return 400 if there is no email', () => {
+    
+    it('should return 400 if there is no password', () => {
         let mockedUser = {
             account: 'test',
-            email: null
+            password: null
         }
         const result = sut.handle(mockedUser)
         expect(result.statusCode).toBe(400)
+    })
+    it('should return 200 if everything is correct', () => {
+        let mockedUser = {
+            account: 'test',
+            password: 'test@test.com'
+        }
+        const result = sut.handle(mockedUser)
+        expect(result.statusCode).toBe(200)
     })
 })
