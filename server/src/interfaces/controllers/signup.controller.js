@@ -11,7 +11,7 @@ module.exports = class SignUpController {
         const validation = this.#validator.handle(req.body)
 
         if (validation.statusCode !== 200) {
-            return badRequest(validation.message)
+            return badRequest({ message: validation.message })
         }
     }
 }

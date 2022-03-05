@@ -1,12 +1,12 @@
+const { badRequest, ok } = require("../../interfaces/helpers/http-helpers")
+
 module.exports = class SignUpValidator {
     handle(data) {
         let obligatoryFields = ['account', 'password']
 
         let errors = []
 
-        if (!data) {
-            return { statusCode: 400, message: 'There is no data!' }
-        }
+        if (!data) return badRequest({ message: 'There is no data!' })
 
         for (const field of obligatoryFields) {
             if (!data[field]) {
@@ -14,10 +14,8 @@ module.exports = class SignUpValidator {
             }
         }
 
-        if (errors.length > 0) {
-            return { statusCode: 400, message: errors.join(',') }
-        }
+        if (errors.length > 0) return badRequest({ message: errors.join(',') })
 
-        return { statusCode: 200 }
+        return ok()
     }
 }

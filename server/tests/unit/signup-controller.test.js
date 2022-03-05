@@ -11,4 +11,10 @@ describe('signup-validator', () => {
         const { statusCode } = sut.handle(req, res)
         expect(statusCode).toBe(400)
     })
+    it('If valid data is provided, should save user', () => {
+        let req = { body: {} }
+        let res = null
+        const { statusCode } = sut.handle(req, res)
+        expect(statusCode).toBe(400)
+    })
 })
