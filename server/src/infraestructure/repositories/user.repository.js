@@ -19,7 +19,7 @@ module.exports = class UserRepository {
         }
 
         if (hasAccount.password !== password) {
-            return badRequest({ message: 'Account does not exists' })
+            return badRequest({ message: 'Wrong credentials given' })
         }
 
         return ok(hasAccount)
