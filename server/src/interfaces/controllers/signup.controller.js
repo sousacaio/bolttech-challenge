@@ -10,7 +10,7 @@ module.exports = class SignUpController {
     }
 
     async handle(req, res) {
-
+                
         const validation = this.#validator.handle(req.body)
 
         if (validation.statusCode !== 200) {
@@ -21,6 +21,7 @@ module.exports = class SignUpController {
             account: req.body.account,
             password: req.body.password
         })
+
         return ok(user)
     }
 }
