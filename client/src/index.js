@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes,Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InitialPage from './pages/InitialPage';
 
@@ -9,7 +9,8 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes >        
-        <Route path="/" element={<InitialPage />} />
+        <Route path="/" element={<Navigate to="/welcome" />} />
+        <Route path="/welcome" element={<InitialPage />} />
       </Routes>      
     </BrowserRouter>
   </React.StrictMode>,

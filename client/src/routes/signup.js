@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
+import SignupService from '../services/signup-service'
+
 const SignUp = () => {
 
     const [signup, setSignup] = useState({
@@ -7,8 +9,9 @@ const SignUp = () => {
         password: ''
     })
 
-    const registerUser = () => {
-        console.log(signup)
+    const registerUser = async () => {
+        const signupService = new SignupService()
+        await signupService.handle(signup)
     }
 
     const changeValues = (e, field) => {
