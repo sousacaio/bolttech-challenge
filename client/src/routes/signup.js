@@ -1,5 +1,20 @@
+import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 const SignUp = () => {
+
+    const [signup, setSignup] = useState({
+        account: '',
+        password: ''
+    })
+
+    const registerUser = () => {
+        console.log(signup)
+    }
+
+    const changeValues = (e, field) => {
+        setSignup({ ...signup, [field]: e.target.value })
+    }
+
     return (
         <Form style={{ margin: 20, justifyItems: 'center', alignItems: 'center' }}>
             <Form.Text style={{ fontSize: 20 }}>
@@ -7,14 +22,18 @@ const SignUp = () => {
             </Form.Text>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Account</Form.Label>
-                <Form.Control type="email" placeholder="Enter account" />
+                <Form.Control
+                    onChange={(e) => changeValues(e, 'account')}
+                    type="text" placeholder="Enter account" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control
+                    onChange={(e) => changeValues(e, 'password')}
+                    type="password" placeholder="Password" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick={registerUser}>
                 Sign in
             </Button>
         </Form>
