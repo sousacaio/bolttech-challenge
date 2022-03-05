@@ -12,7 +12,7 @@ module.exports = class UserRepository {
     }
 
     async login({ account, password }) {
-        const hasAccount = await this.#dbProvider.findByAccount({ account, password })
+        const hasAccount = await this.#dbProvider.findByAccount(account)
 
         if (!hasAccount) {
             return badRequest({ message: 'Account does not exists' })

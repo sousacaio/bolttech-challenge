@@ -5,7 +5,7 @@ describe('User repository', () => {
         async save({ account, password }) {
             return Promise.resolve({ account, password, _id: 'any_id' })
         }
-        async findByAccount({ account, password }) {
+        async findByAccount(account) {
             if (account == 'correct_account') {
                 
                 return Promise.resolve({
