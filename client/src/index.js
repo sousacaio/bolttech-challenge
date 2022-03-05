@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes,Navigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import InitialPage from './pages/InitialPage';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Routes >        
+        <Route path="/" element={<Navigate to="/welcome" />} />
+        <Route path="/welcome" element={<InitialPage />} />
+      </Routes>      
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
