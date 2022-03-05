@@ -1,3 +1,4 @@
+const { badRequest, ok } = require('../../interfaces/helpers/http-helpers')
 module.exports = class UserRepository {
 
     #dbProvider
@@ -5,8 +6,22 @@ module.exports = class UserRepository {
     constructor(dbProvider) {
         this.#dbProvider = dbProvider
     }
-    
+
     async save({ account, password }) {
         return await this.#dbProvider.save({ account, password })
+    }
+
+    async login({ account, password }) {
+        const hasAccount = await this.#dbProvider.findByAccount({ account, password })
+
+        if (!hasAccount) {
+            return badRequest({ message: 'Account does not exists' })
+        }
+
+        if (hasAccount.password !== password) {
+            return badRequest({ message: 'Account does not exists' })
+        }
+
+        return ok(hasAccount)
     }
 }
