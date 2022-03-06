@@ -24,4 +24,14 @@ module.exports = class UserRepository {
 
         return ok(hasAccount)
     }
+
+    async findProjectsById(id) {
+        const hasProjects = await this.#dbProvider.findProjectsById(id)
+        
+        if (!hasProjects) {
+            return ok({ message: 'No projects yet' })
+        }
+
+        return ok(hasProjects)
+    }
 }
