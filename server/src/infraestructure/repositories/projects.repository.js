@@ -10,7 +10,7 @@ module.exports = class ProjectsRepository {
     async findProjectsById(id) {
         const hasProjects = await this.#dbProvider.findProjectsByUserId(id)
         
-        if (!hasProjects) {
+        if (hasProjects?.length === 0) {            
             return ok({ message: 'No projects yet' })
         }
 
