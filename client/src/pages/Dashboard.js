@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar'
 import Projects from '../components/Projects'
+import NewProject from '../components/NewProject'
 import GetProjectsService from '../services/get-projects-service'
 
 const Dashboard = () => {
@@ -35,7 +36,9 @@ const Dashboard = () => {
                 <div className="Projects" style={{ display: 'flex', justifyContent: 'center' }}>
                     {projects ? <Projects projects={projects} /> : <></>}
                 </div>
-                <div className="New-Project">New Projects</div>
+                <div className="New-Project" style={{ height: '50%' }}>
+                    <NewProject></NewProject>
+                </div>
             </div>
             <div className="Navbar" style={{ backgroundColor: '#fafafa' }}>
                 <div className="User">

@@ -41,6 +41,7 @@
         "."
         ".";
     grid-area: New-Project;
+    margin-top: 20px;
 }
 
 .Navbar {
@@ -60,4 +61,5 @@
 
 .Project {
     grid-area: Project;
+    margin-top: 20px;
 }

@@ -1,13 +1,18 @@
+import DetailedProject from './DetailedProject'
+
 const Projects = ({ projects }) => {
 
     const hasMessage = projects?.message
     const hasProjects = Array.isArray(projects)
 
     return (
-        <div>
+        <div style={{width:'100%'}}>
             {!hasProjects ?
                 (<div> {hasMessage} </div>) :
-                (<>{JSON.stringify(projects)}</>)}
+                (<>{projects.map((project, index) => {
+                    return <DetailedProject project={project} key={index} />
+                }
+                )}</>)}
         </div>
     )
 }
