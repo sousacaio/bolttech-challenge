@@ -1,5 +1,5 @@
 .container {
-    display: grid;    
+    display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 0.2fr 1.8fr;
     grid-auto-columns: 1fr;
@@ -23,12 +23,13 @@
 }
 
 .Projects {
-    grid-area: Projects; 
+    grid-area: Projects;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
+    margin-top: 20px;
 }
 
 .New-Project {

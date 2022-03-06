@@ -3,10 +3,13 @@ import Wrapper from '../components/Wrapper'
 import { Form, Button } from 'react-bootstrap'
 import SignInService from '../services/signin-service'
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { update } from '../store/user'
 
 const Signin = () => {
     let navigate = useNavigate();
-
+    const dispatch = useDispatch()
+    
     const [signin, setSignIn] = useState({
         account: '',
         password: ''
@@ -15,9 +18,9 @@ const Signin = () => {
     const signinUser = async () => {
         const signinService = new SignInService()
         let response = await signinService.handle(signin)
-        if (response.status === 200) {
-            localStorage.setItem('user', JSON.stringify(response.data))
-            navigate(`/dashboard/${response.data._id}`)
+        if (response.status === 200) {            
+            dispatch(update(response.data))
+            navigate(`/dashboard/${response.data._id}`)            
         }
     }
 
