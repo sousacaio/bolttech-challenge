@@ -2,9 +2,11 @@ import { useState } from 'react'
 import Wrapper from '../components/Wrapper'
 import { Form, Button } from 'react-bootstrap'
 import SignInService from '../services/signin-service'
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
-    
+    let navigate = useNavigate();
+
     const [signin, setSignIn] = useState({
         account: '',
         password: ''
@@ -12,7 +14,11 @@ const Signin = () => {
 
     const signinUser = async () => {
         const signinService = new SignInService()
-        await signinService.handle(signin)
+        let response = await signinService.handle(signin)
+        if (response.status === 200) {
+            localStorage.setItem('user', JSON.stringify(response.data))
+            navigate(`/dashboard/${response.data._id}`)
+        }
     }
 
     const changeValues = (e, field) => {
