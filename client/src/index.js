@@ -1,9 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes,Navigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import InitialPage from './pages/InitialPage';
+import Dashboard from './pages/Dashboard';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,6 +12,7 @@ ReactDOM.render(
       <Routes >        
         <Route path="/" element={<Navigate to="/welcome" />} />
         <Route path="/welcome" element={<InitialPage />} />
+        <Route path="/dashboard/:_id" element={<Dashboard />} />
       </Routes>      
     </BrowserRouter>
   </React.StrictMode>,
