@@ -7,14 +7,14 @@ describe('User repository', () => {
         }
         async findByAccount(account) {
             if (account == 'correct_account') {
-                
+
                 return Promise.resolve({
                     account,
                     password: 'correct_password',
                     id_: 'any_id'
                 })
             }
-            
+
             return Promise.resolve(null)
         }
     }
