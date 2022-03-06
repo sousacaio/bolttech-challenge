@@ -17,22 +17,6 @@ describe('User repository', () => {
 
             return Promise.resolve(null)
         }
-
-        async findProjectsById(id) {
-            if (id === 'id_with_activities') {
-                return Promise.resolve([{
-                    name: 'Project name',
-                    activities: [
-                        {
-                            id: 'activitie_id',
-                            name: 'activie 1',
-                            status: false
-                        }
-                    ]
-                }])
-            }
-            return Promise.resolve(null)
-        }
     }
 
     const fakeDbProvider = new FakeDbProvider()
@@ -63,17 +47,5 @@ describe('User repository', () => {
         let expected = { account: 'correct_account', password: 'correct_password' }
         const { statusCode } = await sut.login(expected)
         expect(statusCode).toBe(200)
-    })
-
-    it('Should return no projects message if user has no projects yet', async () => {        
-        const { statusCode,body } = await sut.findProjectsById('any_id')
-        expect(statusCode).toBe(200)
-        expect(body.message).toBe('No projects yet')
-    })
-    it('Should projects data if user has projects', async () => {        
-        const { statusCode,body } = await sut.findProjectsById('id_with_activities')
-        expect(statusCode).toBe(200)        
-        expect(body[0].name).toBe('Project name')
-        expect(body[0].activities.length).toBe(1)
     })
 })
