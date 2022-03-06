@@ -1,6 +1,8 @@
 import { Accordion } from 'react-bootstrap';
+import { useSelector } from 'react-redux'
 
-const Navbar = ({ account }) => {
+const Navbar = () => {
+    const account = useSelector((state) => state.user.account)
     return (
         <Accordion>
             <Accordion.Item eventKey="0">

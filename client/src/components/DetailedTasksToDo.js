@@ -5,8 +5,11 @@ const DetailedTasksToDo = ({ tasks }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             {hasTasks ? tasksToDo.map((task, index) => (
-                <div style={{ margin: 5, padding: 2 }}>
-                    <input type="checkbox" key={index} value={task.title} checked={task.status} />
+                <div key={index} style={{ margin: 5, padding: 2 }}>
+                    <input type="checkbox" value={task.title} checked={task.status} onChange={(e) => console.log({
+                        value: e.target.value,
+                        _id:task._id
+                    })} />
                     <label>{task.title}</label>
                 </div>
             )) :

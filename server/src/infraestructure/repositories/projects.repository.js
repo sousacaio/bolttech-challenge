@@ -9,11 +9,27 @@ module.exports = class ProjectsRepository {
 
     async findProjectsById(id) {
         const hasProjects = await this.#dbProvider.findProjectsByUserId(id)
-        
-        if (hasProjects?.length === 0) {            
-            return ok({ message: 'No projects yet' })
+
+        if (hasProjects?.length === 0) {
+            return ok([])
         }
 
         return ok(hasProjects)
+    }
+    async createProject(id, name) {
+        const project = await this.#dbProvider.createProject(id, name)
+
+        return ok(project)
+    }
+
+    async deleteProject(project_id) {
+        const project = await this.#dbProvider.deleteProject(project_id)
+
+        return ok(project)
+    }
+
+    async updateProject(project_id, name) {
+        const project = await this.#dbProvider.updateProject(project_id, name)
+        return ok(project)
     }
 }

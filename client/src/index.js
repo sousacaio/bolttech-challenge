@@ -3,19 +3,23 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes,Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import InitialPage from './pages/InitialPage';
 import Dashboard from './pages/Dashboard';
+import store from './store/store'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes >        
-        <Route path="/" element={<Navigate to="/welcome" />} />
-        <Route path="/welcome" element={<InitialPage />} />
-        <Route path="/dashboard/:_id" element={<Dashboard />} />
-      </Routes>      
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes >
+          <Route path="/" element={<Navigate to="/welcome" />} />
+          <Route path="/welcome" element={<InitialPage />} />
+          <Route path="/dashboard/:_id" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
