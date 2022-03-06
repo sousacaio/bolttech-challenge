@@ -8,7 +8,10 @@ module.exports = class CreateProjectController {
     }
 
     async handle(req, res) {
+        
         let { params: { user_id }, body: { name } } = req
+        console.log(name)
+        console.log(user_id)
         return await this.#projectsRepository.createProject(user_id, name)
     }
 }
