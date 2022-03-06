@@ -16,4 +16,9 @@ module.exports = class ProjectsRepository {
 
         return ok(hasProjects)
     }
+    async createProject(id,name) {
+        const project = await this.#dbProvider.createProject(id,name)   
+          
+        return ok(project)
+    }
 }
