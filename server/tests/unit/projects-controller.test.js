@@ -55,8 +55,7 @@ describe('Projects controller', () => {
         }
         let res = null
         const { statusCode, body } = await sut.handle(req, res)
-        expect(statusCode).toBe(200)        
-        expect(body.length).toBe(1)        
+        expect(statusCode).toBe(200)                
         expect(body[0].tasks.length).toBe(1)        
     })
 })
