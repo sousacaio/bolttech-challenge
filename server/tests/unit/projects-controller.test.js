@@ -18,7 +18,7 @@ describe('Projects controller', () => {
                     ]
                 }])
             }
-            return Promise.resolve(null)
+            return Promise.resolve([])
         }
     }
 

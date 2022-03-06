@@ -6,7 +6,7 @@ describe('Projects repository', () => {
             if (id === 'id_with_activities') {
                 return Promise.resolve([{
                     name: 'Project name',
-                    activities: [
+                    task: [
                         {
                             id: 'activitie_id',
                             name: 'activie 1',
@@ -15,7 +15,7 @@ describe('Projects repository', () => {
                     ]
                 }])
             }
-            return Promise.resolve(null)
+            return Promise.resolve([])
         }
     }
 
@@ -27,14 +27,14 @@ describe('Projects repository', () => {
         const { statusCode,body } = await sut.findProjectsById('id_with_activities')
         expect(statusCode).toBe(200)        
         expect(body[0].name).toBe('Project name')
-        expect(body[0].activities.length).toBe(1)
+        expect(body[0].task.length).toBe(1)
     })
 
     it('Should projects data if user has projects', async () => {    
         const { statusCode,body } = await sut.findProjectsById('id_with_activities')
         expect(statusCode).toBe(200)        
         expect(body[0].name).toBe('Project name')
-        expect(body[0].activities.length).toBe(1)
+        expect(body[0].task.length).toBe(1)
     })
     
     it('Should return no projects message if user has no projects yet', async () => {        
