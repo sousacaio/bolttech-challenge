@@ -9,7 +9,7 @@ describe('Projects controller', () => {
             if (id === 'id_with_activities') {
                 return Promise.resolve([{
                     name: 'Project name',
-                    activities: [
+                    tasks: [
                         {
                             id: 'activitie_id',
                             name: 'activie 1',
@@ -57,6 +57,6 @@ describe('Projects controller', () => {
         const { statusCode, body } = await sut.handle(req, res)
         expect(statusCode).toBe(200)        
         expect(body.length).toBe(1)        
-        expect(body[0].activities.length).toBe(1)        
+        expect(body[0].tasks.length).toBe(1)        
     })
 })
