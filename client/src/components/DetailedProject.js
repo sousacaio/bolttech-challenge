@@ -2,6 +2,7 @@ import DetailedTasksToDo from "./DetailedTasksToDo"
 import DetailedTasksDone from "./DetailedTasksDone"
 import DeleteProjectService from '../services/delete-project.service'
 import EditProjectService from '../services/edit-project.service'
+import CreateTaskService from '../services/create-task.service'
 import { BsTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
 import { deleteProjectFromStore, editProject } from '../store/projects'
@@ -12,6 +13,8 @@ const DetailedProject = ({ project }) => {
 
     const [modalShow, setModalShow] = useState(false);
 
+    const [taskName, setTaskName] = useState('');
+
     let dispatch = useDispatch()
 
     let deleteProject = async (id) => {
@@ -19,6 +22,14 @@ const DetailedProject = ({ project }) => {
         let response = await deleteProject.handle(id)
         if (response.status === 200) {
             dispatch(deleteProjectFromStore({ _id: id }))
+        }
+    }
+    let createTask = async (id) => {
+        const create = new CreateTaskService()
+        console.log(id,taskName)
+        let response = await create.handle(id, taskName)
+        if (response.status === 200) {
+
         }
     }
 
@@ -44,14 +55,14 @@ const DetailedProject = ({ project }) => {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                     <div style={{ margin: 5, justifyContent: 'center' }} onClick={() => setModalShow(true)}>
-                        <BsFillPencilFill />
+                        <BsFillPencilFill color="#3b6fba" />
                     </div>
                     <div style={{ margin: 5, justifyContent: 'center' }} onClick={(e) => deleteProject(project._id)}>
-                        <BsTrashFill />
+                        <BsTrashFill color="#3b6fba" />
                     </div>
                 </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', padding: 10 }}>
                 <div>
                     <div>To do</div>
                     <DetailedTasksToDo tasks={project.tasks} />
@@ -62,10 +73,16 @@ const DetailedProject = ({ project }) => {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                     <div>
-                        <input type="text"></input>
+                        <Form.Group className="mb-3">
+                            <Form.Control type="text" placeholder="Tasks"
+                                onChange={(e) => setTaskName(e.target.value)}
+                            />
+                        </Form.Group>
                     </div>
                     <div>
-                        <button title="Add">Add</button>
+                        <Button variant="success" onClick={(e) => createTask(project._id)}>
+                            Add
+                        </Button>
                     </div>
                 </div>
             </div>

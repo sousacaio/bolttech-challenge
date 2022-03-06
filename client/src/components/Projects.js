@@ -6,7 +6,7 @@ const Projects = ({ projects }) => {
     const hasProjects = Array.isArray(projects)
 
     return (
-        <div style={{ width: '100%',marginBottom:80}}>
+        <div style={{ width: '100%', marginBottom: 80 }}>
             {!hasProjects ?
                 (<div> {hasMessage} </div>) :
                 (<>{projects.map((project, index) => {
