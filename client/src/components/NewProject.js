@@ -9,7 +9,7 @@ const NewProject = () => {
             <Form.Group className="mb-3">
                 <Form.Control type="text" placeholder="Project name" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary">
                 Create Project
             </Button>
         </Form>
