@@ -2,6 +2,8 @@ import './dashboard.css'
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar'
+import Projects from '../components/Projects'
+import GetProjectsService from '../services/get-projects-service'
 
 const Dashboard = () => {
 
@@ -16,17 +18,23 @@ const Dashboard = () => {
     }, [])
 
     const fetchProjects = async () => {
-        
+        const getProjectsService = new GetProjectsService()
+        const response = await getProjectsService.handle(params._id)
+        if (response.status === 200) {
+            setProjects(response.data)
+        }
     }
 
     useEffect(() => {
-
-    }, [projects])
+        fetchProjects()
+    }, [])
 
     return (
         <div className="container">
             <div className="BodySection">
-                <div className="Projects">Projects</div>
+                <div className="Projects" style={{ display: 'flex', justifyContent: 'center' }}>
+                    {projects ? <Projects projects={projects} /> : <></>}
+                </div>
                 <div className="New-Project">New Projects</div>
             </div>
             <div className="Navbar" style={{ backgroundColor: '#fafafa' }}>
