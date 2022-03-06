@@ -11,7 +11,7 @@ module.exports = class ProjectsRepository {
         const hasProjects = await this.#dbProvider.findProjectsByUserId(id)
 
         if (hasProjects?.length === 0) {
-            return ok({ message: 'No projects yet' })
+            return ok([])
         }
 
         return ok(hasProjects)
@@ -22,9 +22,14 @@ module.exports = class ProjectsRepository {
         return ok(project)
     }
 
-    async deleteProject(project_id) {        
+    async deleteProject(project_id) {
         const project = await this.#dbProvider.deleteProject(project_id)
 
+        return ok(project)
+    }
+
+    async updateProject(project_id, name) {
+        const project = await this.#dbProvider.updateProject(project_id, name)
         return ok(project)
     }
 }

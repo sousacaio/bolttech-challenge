@@ -12,7 +12,11 @@ module.exports = class MongoDbProjectsService {
         })
     }
     async deleteProject(project_id) {
-        const deletion =  await Projects.deleteOne({ _id: project_id })        
+        const deletion = await Projects.deleteOne({ _id: project_id })
         return deletion
+    }
+
+    async updateProject(project_id, name) {
+        return await Projects.findOneAndUpdate({ _id: project_id }, { name }, { returnOriginal: false })
     }
 }

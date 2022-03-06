@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [projects, setProjects] = useState([])
 
     let reduxProjects = useSelector(state => state.projects)
+    let generalStates = useSelector(state => state)
     let params = useParams()
 
     const fetchProjects = async () => {
@@ -29,6 +30,7 @@ const Dashboard = () => {
     useEffect(() => { fetchProjects() }, [])
 
     useEffect(() => {
+        console.log(generalStates)
         setProjects(reduxProjects.data)
     }, [reduxProjects]);
 
