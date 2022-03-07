@@ -37,7 +37,7 @@ const SignUp = () => {
                     type="password" placeholder="Password" />
             </Form.Group>
             <Button variant="primary" onClick={registerUser}>
-                Sign in
+                Sign Up
             </Button>
         </Form>
     )
