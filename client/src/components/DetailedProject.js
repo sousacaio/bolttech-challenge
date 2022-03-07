@@ -5,7 +5,7 @@ import EditProjectService from '../services/edit-project.service'
 import CreateTaskService from '../services/create-task.service'
 import { BsTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
-import { deleteProjectFromStore, editProject } from '../store/projects'
+import { deleteProjectFromStore, editProject, addTask } from '../store/projects'
 import { useState } from "react"
 import { Modal, Button, Form } from 'react-bootstrap'
 
@@ -24,12 +24,19 @@ const DetailedProject = ({ project }) => {
             dispatch(deleteProjectFromStore({ _id: id }))
         }
     }
-    let createTask = async (id) => {
-        const create = new CreateTaskService()
-        console.log(id,taskName)
-        let response = await create.handle(id, taskName)
-        if (response.status === 200) {
 
+    let createTask = async (id) => {
+        if(!taskName){
+            alert('The name of the task is required')
+            return
+        }
+        const create = new CreateTaskService()
+
+        let response = await create.handle(id, taskName)
+
+        if (response.status === 200) {
+            dispatch(addTask(response.data))
+            setTaskName('')
         }
     }
 
@@ -38,9 +45,8 @@ const DetailedProject = ({ project }) => {
             border: 'solid #d9d9d9',
             borderWidth: 2,
             borderColor: '#d9d9d9',
-            width: 'auto',
-            padding: 'auto',
-            marginBottom: 20
+            width:'100%',
+            marginBottom:5           
         }}>
 
             <MyVerticallyCenteredModal
@@ -65,17 +71,18 @@ const DetailedProject = ({ project }) => {
             <div style={{ display: 'flex', flexDirection: 'column', padding: 10 }}>
                 <div>
                     <div>To do</div>
-                    <DetailedTasksToDo tasks={project.tasks} />
+                    <DetailedTasksToDo tasks={project.tasks} projectId={project._id} />
                 </div>
                 <div>
                     <div>Done</div>
-                    <DetailedTasksDone tasks={project.tasks} />
+                    <DetailedTasksDone tasks={project.tasks} projectId={project._id} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                     <div>
                         <Form.Group className="mb-3">
                             <Form.Control type="text" placeholder="Tasks"
                                 onChange={(e) => setTaskName(e.target.value)}
+                                value={taskName}
                             />
                         </Form.Group>
                     </div>

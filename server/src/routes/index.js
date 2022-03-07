@@ -1,8 +1,10 @@
 const routes = require('express').Router()
 const userRoutes = require('./user/index')
-const projecRoutes = require('./projects/index')
+const projectRoutes = require('./projects/index')
+const tasksRoutes = require('./tasks/index')
 
 routes.use('/user', userRoutes)
-routes.use('/projects', projecRoutes)
+routes.use('/projects', projectRoutes)
+routes.use('/tasks', tasksRoutes)
 
 module.exports = routes

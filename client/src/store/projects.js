@@ -9,8 +9,8 @@ export const projectsSlice = createSlice({
         update: (state, action) => {
             state.data = action.payload
         },
-        newProject: (state, action) => {            
-            if(!state.data){
+        newProject: (state, action) => {
+            if (!state.data) {
                 state.data = [action.payload]
                 return
             }
@@ -31,8 +31,12 @@ export const projectsSlice = createSlice({
         },
         addTask: (state, action) => {
             let projectId = action.payload._id
-            let project = state.data.filter((project) => project._id === projectId)
-            project.tasks.push(action.payload)
+            state.data = state.data.map((project) => {
+                if (project._id === projectId) {
+                    return { ...project, tasks: action.payload.tasks }
+                }
+                return project
+            })
         },
         removeTask: (state, action) => {
             let projectId = action.payload._id
@@ -41,6 +45,6 @@ export const projectsSlice = createSlice({
     },
 })
 
-export const { update, newProject, deleteProjectFromStore, editProject } = projectsSlice.actions
+export const { update, newProject, deleteProjectFromStore, editProject,addTask } = projectsSlice.actions
 
 export default projectsSlice.reducer
